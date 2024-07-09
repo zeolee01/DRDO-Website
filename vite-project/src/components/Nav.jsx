@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { Link } from "react-scroll"
-// import { Link } from "react-dom"
 import { FaTimes } from "react-icons/fa"
 import { CiMenuFries } from "react-icons/ci"
 
@@ -44,50 +43,50 @@ const Nav = () => {
 
   return (
     <nav>
-      <div className="h-10vh flex justify-between z-50 text-white lg:py-5 px-20 py-4">
+      <div className="h-10vh flex justify-between z-50 text-white lg:py-5 px-20 py-3">
         <div className="flex items-center flex-1">
-          <div className="flex flex-col items-center pt-2">
+          <div className="flex flex-col items-center">
             <img
-              className=" object-cover max-w-22 max-h-22 h-20 "
+              className=" object-cover max-w-16 max-h-16 h-20 "
               src="src/assets/drdo-logo.png"
               alt="Logo"
             />
-            <span className="text-lg font-medium hover:text-fuchsia-50 transition border-b-2 border-slate-900 hover:border-fuchsia-50 cursor-pointer">
-              DRDO
-            </span>
           </div>
         </div>
         <div className="lg:flex lg:flex-1 items-center justify-end font-normal hidden">
           <div className="flex-10">
             <ul className="flex gap-8 mr-16 text-[18px]">
               <Link spy={true} smooth={true} to="About">
-                <li className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">
+                <li className="hover:text-emerald-200  transition border-b-2 border-teal-950 hover:border-emerald-200  cursor-pointer">
                   Home
                 </li>
               </Link>
               <Link spy={true} smooth={true} to="Admin">
-                <li className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">
+                <li className="hover:text-emerald-200 transition border-b-2 border-teal-950 hover:border-emerald-200 cursor-pointer">
                   About
                 </li>
               </Link>
               <Link spy={true} smooth={true} to="Employee">
-                <li className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">
+                <li className="hover:text-emerald-200 transition border-b-2 border-teal-950 hover:border-emerald-200 cursor-pointer">
                   Admin
                 </li>
               </Link>
               <Link spy={true} smooth={true} to="Edit">
-                <li className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">
+                <li className="hover:text-emerald-200 transition border-b-2 border-teal-950 hover:border-emerald-200 cursor-pointer">
                   Edit
                 </li>
               </Link>
               <Link spy={true} smooth={true} to="Notice">
-                <li className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">
+                <li
+                  className="hover:text-emerald-200 transition border-b-2 
+                border-teal-950 hover:border-emerald-200 cursor-pointer"
+                >
                   Notice
                 </li>
               </Link>
             </ul>
           </div>
-          <button className="hidden md:flex gap-2 items-center border border-gray-400 px-6 py-2 rounded-lg hover:border-gray-600">
+          <button className="hidden md:flex gap-2 items-center border border-gray-400 px-6 py-2 rounded-2xl hover:border-gray-600 bg-emerald-200 text-teal-950 hover:bg-teal-950 hover:text-white">
             <span>LOG OUT</span>
           </button>
         </div>
