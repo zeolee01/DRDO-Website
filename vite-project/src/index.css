@@ -69,3 +69,7 @@ button:focus-visible {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-color: hsl(179, 85%, 10%);
+}
