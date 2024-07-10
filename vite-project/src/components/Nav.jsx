@@ -42,7 +42,7 @@ const Nav = () => {
   )
 
   return (
-    <nav>
+    <nav className="">
       <div className="h-10vh flex justify-between z-50 text-white lg:py-5 px-20 py-3">
         <div className="flex items-center flex-1">
           <div className="flex flex-col items-center">
@@ -86,7 +86,7 @@ const Nav = () => {
               </Link>
             </ul>
           </div>
-          <button className="hidden md:flex gap-2 items-center border border-gray-400 px-6 py-2 rounded-2xl hover:border-gray-600 bg-emerald-200 text-teal-950 hover:bg-teal-950 hover:text-white">
+          <button className="hidden md:flex gap-2 items-center border border-white px-6 py-2 rounded-xl bg-emerald-200 text-teal-950 hover:bg-teal-950 hover:text-white">
             <span>LOG OUT</span>
           </button>
         </div>
