@@ -1,11 +1,11 @@
 import "./App.css"
 import Home from "./Pages/Home/Home"
-import Nav from "./components/Nav"
+import NavBar from "./components/NavBar"
 
 function App() {
   return (
     <div className="bg-teal-950 h-full w-full pb-5">
-      <Nav />
+      <NavBar />
       <Home />
     </div>
   )

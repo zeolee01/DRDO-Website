@@ -1,9 +1,10 @@
+import React from "react"
 import { useState } from "react"
 import { Link } from "react-scroll"
 import { FaTimes } from "react-icons/fa"
 import { CiMenuFries } from "react-icons/ci"
 
-const Nav = () => {
+const NavBar = () => {
   const [click, setClick] = useState(false)
   const handleClick = () => {
     setClick(!click)
@@ -99,4 +100,4 @@ const Nav = () => {
   )
 }
 
-export default Nav
+export default NavBar
