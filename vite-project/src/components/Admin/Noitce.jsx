@@ -1,74 +1,76 @@
-import React, { useState, useEffect, useRef } from "react";
-import { FaEdit } from "react-icons/fa";
-import '../index.css';
+import React, { useState, useEffect, useRef } from "react"
+import { FaEdit } from "react-icons/fa"
+import "../../index.css"
 
 const Notice = () => {
-  const [notices, setNotices] = useState([]);
-  const [newNotice, setNewNotice] = useState({ content: "", type: "NEW" }); // Changed to use 'type' instead of 'date'
-  const [editNoticeId, setEditNoticeId] = useState(null);
-  const [editNotice, setEditNotice] = useState({ content: "", type: "" }); // Changed to use 'type' instead of 'date'
+  const [notices, setNotices] = useState([])
+  const [newNotice, setNewNotice] = useState({ content: "", type: "NEW" }) // Changed to use 'type' instead of 'date'
+  const [editNoticeId, setEditNoticeId] = useState(null)
+  const [editNotice, setEditNotice] = useState({ content: "", type: "" }) // Changed to use 'type' instead of 'date'
 
-  const editRef = useRef();
+  const editRef = useRef()
 
   useEffect(() => {
     // Fetch notices from local storage when the component mounts
-    const storedNotices = JSON.parse(localStorage.getItem("notices")) || [];
-    setNotices(storedNotices);
-  }, []);
+    const storedNotices = JSON.parse(localStorage.getItem("notices")) || []
+    setNotices(storedNotices)
+  }, [])
 
   const saveNoticesToLocalStorage = (notices) => {
-    localStorage.setItem("notices", JSON.stringify(notices));
-  };
+    localStorage.setItem("notices", JSON.stringify(notices))
+  }
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewNotice({ ...newNotice, [name]: value });
-  };
+    const { name, value } = e.target
+    setNewNotice({ ...newNotice, [name]: value })
+  }
 
   const handleEditInputChange = (e) => {
-    const { name, value } = e.target;
-    setEditNotice({ ...editNotice, [name]: value });
-  };
+    const { name, value } = e.target
+    setEditNotice({ ...editNotice, [name]: value })
+  }
 
   const addNotice = (e) => {
-    e.preventDefault();
-    const newId = notices.length > 0 ? notices[notices.length - 1].id + 1 : 1;
-    const noticeToAdd = { id: newId, ...newNotice };
-    const updatedNotices = [...notices, noticeToAdd];
-    setNotices(updatedNotices);
-    saveNoticesToLocalStorage(updatedNotices);
-    setNewNotice({ content: "", type: "NEW" }); // Reset type to "NEW"
-  };
+    e.preventDefault()
+    const newId = notices.length > 0 ? notices[notices.length - 1].id + 1 : 1
+    const noticeToAdd = { id: newId, ...newNotice }
+    const updatedNotices = [...notices, noticeToAdd]
+    setNotices(updatedNotices)
+    saveNoticesToLocalStorage(updatedNotices)
+    setNewNotice({ content: "", type: "NEW" }) // Reset type to "NEW"
+  }
 
   const removeNotice = (id) => {
-    const updatedNotices = notices.filter(notice => notice.id !== id);
-    setNotices(updatedNotices);
-    saveNoticesToLocalStorage(updatedNotices);
-  };
+    const updatedNotices = notices.filter((notice) => notice.id !== id)
+    setNotices(updatedNotices)
+    saveNoticesToLocalStorage(updatedNotices)
+  }
 
   const saveEdit = (id) => {
-    const updatedNotices = notices.map(notice =>
-      notice.id === id ? { ...notice, content: editNotice.content, type: editNotice.type } : notice
-    );
-    setNotices(updatedNotices);
-    saveNoticesToLocalStorage(updatedNotices);
-    setEditNoticeId(null);
-    setEditNotice({ content: "", type: "" }); // Reset type
-  };
+    const updatedNotices = notices.map((notice) =>
+      notice.id === id
+        ? { ...notice, content: editNotice.content, type: editNotice.type }
+        : notice
+    )
+    setNotices(updatedNotices)
+    saveNoticesToLocalStorage(updatedNotices)
+    setEditNoticeId(null)
+    setEditNotice({ content: "", type: "" }) // Reset type
+  }
 
   const handleClickOutside = (e) => {
     if (editRef.current && !editRef.current.contains(e.target)) {
-      setEditNoticeId(null);
-      setEditNotice({ content: "", type: "" }); // Reset type
+      setEditNoticeId(null)
+      setEditNotice({ content: "", type: "" }) // Reset type
     }
-  };
+  }
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside)
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [])
 
   return (
     <div className="py-20 w-full notice-background font-titillium">
@@ -77,7 +79,7 @@ const Notice = () => {
       </h1>
       <div className="w-full flex flex-col items-center">
         <div className="notice-list-container w-7/12 max-h-80 overflow-y-auto">
-          {notices.map(notice => (
+          {notices.map((notice) => (
             <div
               key={notice.id}
               className="notice-card bg-white p-6 mb-4"
@@ -113,18 +115,23 @@ const Notice = () => {
                 </div>
               ) : (
                 <div className="flex justify-between items-center w-full">
-                  <div className="content">
-                    {notice.content}
-                  </div>
+                  <div className="content">{notice.content}</div>
                   <div className="flex items-center">
-                    <div className={`type ${notice.type === 'NEW' ? 'text-white' : 'text-white'} bg-red-600 rounded-full px-2 py-1`}>
+                    <div
+                      className={`type ${
+                        notice.type === "NEW" ? "text-white" : "text-white"
+                      } bg-red-600 rounded-full px-2 py-1`}
+                    >
                       {notice.type}
                     </div>
                     <FaEdit
                       className="ml-2 cursor-pointer text-gray-500 hover:text-blue-700"
                       onClick={() => {
-                        setEditNoticeId(notice.id);
-                        setEditNotice({ content: notice.content, type: notice.type });
+                        setEditNoticeId(notice.id)
+                        setEditNotice({
+                          content: notice.content,
+                          type: notice.type,
+                        })
                       }}
                     />
                     <button
@@ -167,7 +174,7 @@ const Notice = () => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Notice;
+export default Notice

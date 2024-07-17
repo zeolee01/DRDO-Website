@@ -1,8 +1,8 @@
 import React from "react"
-import Croucel from "./Croucel"
+import Croucel from "../Croucel"
 import Noitce from "./Noitce"
 import NavBar from "./NavBar"
-import Footer from "./Footer"
+import Footer from "../Footer"
 
 const Home = () => {
   return (
