@@ -13,7 +13,9 @@ export default {
       fontFamily: {
         'font-1': ['Poppins','sans-serif'],
         'display': ['Poppins','sans-serif'],
-        'body': ['Inter','sans-serif']
+        'body': ['Inter','sans-serif'],
+        'sans': ['"Open Sans"', 'sans-serif'],
+        'titillium': ['"Titillium Web"', 'sans-serif'],
       }
     },
   },
