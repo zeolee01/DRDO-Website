@@ -31,14 +31,14 @@ app.post("/register", (req, res) => {
   const sentUserName = req.body.UserName
   const sentPassword = req.body.Password
 
-  const SQL = "INSERT INTO users (email, username, password) VALUES (?, ?, ?)"
+  const SQL =
+    "INSERT INTO employee (email, username, password) VALUES (?, ?, ?)"
   const values = [sentEmail, sentUserName, sentPassword]
-
   db.query(SQL, values, (err, results) => {
     if (err) {
       res.status(500).send({ error: err })
     } else {
-      console.log("User inserted successfully!")
+      // console.log("User inserted successfully!")
       res.status(201).send({ message: "User added!" })
     }
   })
@@ -78,6 +78,48 @@ app.post("/employeelogin", (req, res) => {
       res.send(results)
     } else {
       res.status(401).send({ message: "Credentials don't match!" })
+    }
+  })
+})
+
+// data base for notice
+app.post("/addnotice", (req, res) => {
+  const sentNotice = req.body.content
+  const sentType = req.body.type
+  const SQL = "INSERT INTO notice (text, type) VALUES (?, ?)"
+  const values = [sentNotice, sentType]
+  db.query(SQL, values, (err, results) => {
+    if (err) {
+      res.status(500).send({ error: err })
+    } else {
+      res.status(201).send({ message: "User added!" })
+    }
+  })
+})
+
+// function to fetch notifications
+app.get("/getnotice", (req, res) => {
+  const SQL = "SELECT * FROM notice ORDER BY id DESC"
+
+  db.query(SQL, (err, results) => {
+    if (err) {
+      res.status(500).send({ error: err })
+    } else {
+      res.status(200).send(results)
+    }
+  })
+})
+
+// deletetion of notice
+app.delete("/deletenotice/:id", (req, res) => {
+  const id = req.params.id
+  const SQL = "DELETE FROM notice WHERE id = ?"
+  const values = [id]
+  db.query(SQL, values, (err, result) => {
+    if (err) {
+      res.status(500).send({ error: err.message })
+    } else {
+      res.status(204).send()
     }
   })
 })

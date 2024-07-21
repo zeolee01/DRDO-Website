@@ -25,8 +25,10 @@ const Register = () => {
 
   return (
     <div className="h-[100vh] flex flex-col items-center bg-background bg-cover justify-center text-white font-font-1">
-      <div className="h-[420px] w-80 bg-blue-600/20 border border-blue-600/20 backdrop-blur-lg rounded-lg px-6 py-6 my-4 overflow-hidden">
-        <h2 className="text-3xl font-bold pb-6 text-center">Register</h2>
+      <div className=" bg-blue-600/20 border border-blue-600/20 backdrop-blur-lg rounded-lg px-8 py-8 my-4 overflow-hidden">
+        <h2 className="text-3xl font-bold pb-6 text-center">
+          Employee Register
+        </h2>
         <form className="flex flex-col items-center" onSubmit={createUser}>
           <div className="w-full relative">
             <input
