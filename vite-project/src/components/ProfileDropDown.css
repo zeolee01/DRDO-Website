@@ -1,0 +1,39 @@
+.ProfileDropDown {
+  position: absolute;
+  top: 2rem; /* Adjusted to move the dropdown higher */
+  right: -4rem; 
+  width: 150px;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid gray;
+}
+
+.ProfileDropDown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ProfileDropDown li {
+  padding: 10px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.ProfileDropDown li:hover {
+  transform: scale(1.05);
+  background-color: darkgray;
+}
+
+/* .ProfileDropDown::before {
+  content: '';
+  position: absolute;
+  top: -0.5rem;
+  right: 1rem;
+  width: 10px;
+  height: 10px;
+  transform: rotate(45deg);
+  background-color: gray;
+  border-left: 1px solid gray;
+  border-top: 1px solid gray;
+} */
