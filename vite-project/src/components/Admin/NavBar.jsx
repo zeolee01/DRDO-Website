@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { FaTimes } from "react-icons/fa";
-import { CiMenuFries } from "react-icons/ci";
+import React, { useState } from "react"
+import { Link } from "react-router-dom"
+import { FaTimes } from "react-icons/fa"
+import { CiMenuFries } from "react-icons/ci"
 
 const NavBar = () => {
-  const [click, setClick] = useState(false);
+  const [click, setClick] = useState(false)
 
   const handleClick = () => {
-    setClick(!click);
-  };
+    setClick(!click)
+  }
 
   const content = (
     <div className="lg:hidden block absolute top-16 w-full left-0 right-0 bg-white transition">
@@ -45,7 +45,7 @@ const NavBar = () => {
         </Link>
       </ul>
     </div>
-  );
+  )
 
   return (
     <nav className="bg-white font-titillium">
@@ -62,22 +62,40 @@ const NavBar = () => {
         <div className="lg:flex lg:flex-1 items-center justify-end font-normal hidden">
           <div className="flex-10">
             <ul className="flex gap-8 mr-16 text-[18px]">
-              <Link to="/admindashboard" className="text-black hover:text-emerald-200 transition border-gray-950 hover:border-emerald-200 cursor-pointer">
+              <Link
+                to="/admindashboard"
+                className="text-black hover:text-emerald-200 transition border-gray-950 hover:border-emerald-200 cursor-pointer"
+              >
                 Home
               </Link>
-              <Link to="/about1" className="text-black hover:text-emerald-200 transition border-teal-950 hover:border-emerald-200 cursor-pointer">
+              <Link
+                to="/about1"
+                className="text-black hover:text-emerald-200 transition border-teal-950 hover:border-emerald-200 cursor-pointer"
+              >
                 About
               </Link>
-              <Link to="/admin" className="text-black hover:text-emerald-200 transition border-teal-950 hover:border-emerald-200 cursor-pointer">
+              <Link
+                to="/admin"
+                className="text-black hover:text-emerald-200 transition border-teal-950 hover:border-emerald-200 cursor-pointer"
+              >
                 Admin
               </Link>
-              <Link to="/employee" className="text-black hover:text-emerald-200 transition border-teal-950 hover:border-emerald-200 cursor-pointer">
+              <Link
+                to="/employee"
+                className="text-black hover:text-emerald-200 transition border-teal-950 hover:border-emerald-200 cursor-pointer"
+              >
                 Employee
               </Link>
-              <Link to="/edit" className="text-black hover:text-emerald-200 transition border-teal-950 hover:border-emerald-200 cursor-pointer">
+              <Link
+                to="/fileupload"
+                className="text-black hover:text-emerald-200 transition border-teal-950 hover:border-emerald-200 cursor-pointer"
+              >
                 Edit
               </Link>
-              <Link to="/notice" className="text-black hover:text-emerald-200 transition border-teal-950 hover:border-emerald-200 cursor-pointer">
+              <Link
+                to="/notice"
+                className="text-black hover:text-emerald-200 transition border-teal-950 hover:border-emerald-200 cursor-pointer"
+              >
                 Notice
               </Link>
             </ul>
@@ -95,7 +113,7 @@ const NavBar = () => {
         </button>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default NavBar;
+export default NavBar

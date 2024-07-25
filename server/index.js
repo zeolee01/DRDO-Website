@@ -2,6 +2,8 @@ const express = require("express")
 const app = express()
 const mysql = require("mysql")
 const cors = require("cors")
+const multer = require("multer")
+const path = require("path")
 
 app.use(express.json())
 app.use(cors())
@@ -123,3 +125,6 @@ app.delete("/deletenotice/:id", (req, res) => {
     }
   })
 })
+
+// upload image into corsal
+const storage= multer.
