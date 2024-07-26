@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { FaTimes } from "react-icons/fa";
 import { CiMenuFries } from "react-icons/ci";
@@ -6,13 +7,13 @@ import ProfileDropDown from "../Admin/ProfileDropDown copy";
 import user from "../../assets/user.png";
 import DRDO from "../../assets/drdo-logo.png";
 
-
-
 const NavBar = () => {
+  console.log('NavBar rendered');
+
   const [openProfile, setOpenProfile] = useState(false);
   const [click, setClick] = useState(false);
   const dropdownRef = useRef(null);
-
+  const username = useSelector((state) => state.user.username); // Get username from Redux store
 
   const handleClick = () => {
     setClick(!click);
@@ -22,7 +23,6 @@ const NavBar = () => {
     setOpenProfile(!openProfile);
   };
 
-  //outside click property
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setOpenProfile(false);
@@ -79,7 +79,7 @@ const NavBar = () => {
         <div className="flex items-center flex-1">
           <div className="flex flex-col items-center">
             <img
-              className="object-cover max-w-16 max-h-16 h-16 w-16" 
+              className="object-cover max-w-16 max-h-16 h-16 w-16"
               src={DRDO}
               alt="Logo"
             />
@@ -135,10 +135,13 @@ const NavBar = () => {
               onClick={toggleProfileDropdown}
             />
             {openProfile && (
-              
-              <div  className="absolute right-0 mt-2 z-50">
-                
-                <ProfileDropDown/>
+              <div className="absolute right-0 mt-2 z-50">
+                <ProfileDropDown />
+              </div>
+            )}
+            {username && (
+              <div className="ml-4 text-lg font-semibold text-black">
+                {username}
               </div>
             )}
           </div>

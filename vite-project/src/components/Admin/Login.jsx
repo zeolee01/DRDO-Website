@@ -1,164 +1,47 @@
-// import React, { useState, useEffect } from "react"
-// import { FaUser, FaLock } from "react-icons/fa"
-// import { Link, useNavigate } from "react-router-dom"
-// import Axios from "axios"
-
-// const Login = () => {
-//   const [loginUserName, setLoginUserName] = useState("")
-//   const [loginPassword, setLoginPassword] = useState("")
-//   const [loginStatus, setLoginStatus] = useState("")
-//   const navigateTo = useNavigate()
-
-//   useEffect(() => {
-//     if (loginStatus) {
-//       const timer = setTimeout(() => {
-//         setLoginStatus("")
-//       }, 3000) // Clear the message after 5 seconds
-
-//       return () => clearTimeout(timer) // Clear the timeout if the component unmounts
-//     }
-//   }, [loginStatus])
-
-//   const loginUser = async (e) => {
-//     e.preventDefault()
-//     try {
-//       const response = await Axios.post("http://localhost:3002/adminlogin", {
-//         LoginUserName: loginUserName,
-//         LoginPassword: loginPassword,
-//       })
-
-//       if (response.data.message) {
-//         navigateTo("/")
-//         setLoginStatus(response.data.message)
-//       } else {
-//         navigateTo("/admindashboard")
-//         setLoginStatus("Login successful")
-
-//         // Handle successful login here (e.g., redirect, store token, etc.)
-//       }
-//     } catch (error) {
-//       console.error("There was an error logging in!", error)
-//       setLoginStatus("An error occurred during login")
-//     }
-//   }
-
-//   return (
-//     <div className="h-[100vh] flex flex-col items-center bg-background bg-cover justify-center text-white font-font-1">
-//       <div className="h-[409px] w-80 bg-blue-600/20 border border-blue-600/20 backdrop-blur-lg rounded-lg px-6 py-6 my-4 overflow-hidden">
-//         <h2 className="text-3xl font-bold pb-6 text-center">Admin Login</h2>
-//         <form className="flex flex-col items-center" onSubmit={loginUser}>
-//           <div className="w-full relative">
-//             <input
-//               className="border border-gray-200 w-full rounded-full py-2 px-4 my-2 bg-transparent"
-//               placeholder="Username"
-//               id="username"
-//               type="text"
-//               value={loginUserName}
-//               onChange={(event) => setLoginUserName(event.target.value)}
-//               onSubmit={() => {
-//                 setLoginUserName()
-//               }}
-//             />
-//             <FaUser className="absolute top-[35%] right-3" />
-//           </div>
-//           <div className="w-full relative">
-//             <input
-//               className="border border-gray-200 w-full rounded-full py-2 px-4 my-2 bg-transparent"
-//               placeholder="Password"
-//               id="password"
-//               type="password"
-//               value={loginPassword}
-//               onChange={(event) => setLoginPassword(event.target.value)}
-//               onSubmit={() => {
-//                 setLoginPassword()
-//               }}
-//             />
-//             <FaLock className="absolute top-[35%] right-3" />
-//           </div>
-//           <button
-//             className="my-4 py-2 w-full rounded-full bg-blue-600"
-//             type="submit"
-//           >
-//             <span>Login</span>
-//           </button>
-//           <p className="text-[14px]">
-//             Don't have an Account?{" "}
-//             <Link to={"/"}>
-//               <button className="font-semibold cursor-pointer">Register</button>
-//             </Link>
-//           </p>
-//           <p className="text-[14px]">
-//             Login as employee?{" "}
-//             <Link to={"/employeelogin"}>
-//               <button className="font-semibold cursor-pointer">Login</button>
-//             </Link>
-//           </p>
-//           {loginStatus && <p className="mt-4 text-black">{loginStatus}</p>}
-//         </form>
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default Login
-
-import React, { useState, useEffect } from "react"
-import { FaUser, FaLock } from "react-icons/fa"
-import { Link, useNavigate } from "react-router-dom"
-import Axios from "axios"
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
+import { FaUser, FaLock } from "react-icons/fa";
+import Axios from "axios";
+import { setUsername } from "./actions/userActions";
 
 const Login = () => {
-  const [loginUserName, setLoginUserName] = useState("")
-  const [loginPassword, setLoginPassword] = useState("")
-  const [loginStatus, setLoginStatus] = useState("")
-  const navigateTo = useNavigate()
-
-  useEffect(() => {
-    if (loginStatus === "Login successful") {
-      setLoginStatus("")
-    }
-  }, [loginStatus])
-
-  useEffect(() => {
-    if (loginStatus) {
-      const timer = setTimeout(() => {
-        setLoginStatus("")
-      }, 3000)
-      return () => clearTimeout(timer)
-    }
-  }, [loginStatus])
+  const [loginUserName, setLoginUserName] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [loginStatus, setLoginStatus] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const loginUser = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
       const response = await Axios.post("http://localhost:3002/adminlogin", {
         LoginUserName: loginUserName,
         LoginPassword: loginPassword,
-      })
+      });
 
       if (response.data.message) {
-        navigateTo("/")
-        setLoginStatus(response.data.message)
-        setLoginPassword("")
-        setLoginUserName("")
+        setLoginStatus(response.data.message);
+        setLoginPassword("");
+        setLoginUserName("");
       } else {
-        navigateTo("/admindashboard")
-        setLoginStatus("Login successful")
+        dispatch(setUsername(loginUserName)); // Set username in Redux store
+        navigate("/admindashboard");
       }
     } catch (error) {
-      console.error("There was an error logging in!", error)
-      setLoginStatus("An error occurred during login")
+      console.error("There was an error logging in!", error);
+      setLoginStatus("An error occurred during login");
     }
-  }
+  };
 
   return (
-    <div className="h-[100vh] flex flex-col items-center bg-background bg-cover justify-center text-white font-font-1">
-      <div className="h-[409px] w-80 bg-blue-600/20 border border-blue-600/20 backdrop-blur-lg rounded-lg px-6 py-6 my-4 overflow-hidden">
+    <div className="h-screen flex items-center justify-center bg-background bg-cover text-white font-font-1">
+      <div className="bg-blue-600/20 border border-blue-600/20 backdrop-blur-lg rounded-lg px-6 py-6 w-80">
         <h2 className="text-3xl font-bold pb-6 text-center">Admin Login</h2>
         <form className="flex flex-col items-center" onSubmit={loginUser}>
-          <div className="w-full relative">
+          <div className="w-full relative mb-4">
             <input
-              className="border border-gray-200 w-full rounded-full py-2 px-4 my-2 bg-transparent"
+              className="border border-gray-200 w-full rounded-full py-2 px-4 bg-transparent"
               placeholder="Username"
               id="username"
               type="text"
@@ -167,9 +50,9 @@ const Login = () => {
             />
             <FaUser className="absolute top-[35%] right-3" />
           </div>
-          <div className="w-full relative">
+          <div className="w-full relative mb-4">
             <input
-              className="border border-gray-200 w-full rounded-full py-2 px-4 my-2 bg-transparent"
+              className="border border-gray-200 w-full rounded-full py-2 px-4 bg-transparent"
               placeholder="Password"
               id="password"
               type="password"
@@ -179,11 +62,13 @@ const Login = () => {
             <FaLock className="absolute top-[35%] right-3" />
           </div>
           <button
-            className="my-4 py-2 w-full rounded-full bg-blue-600"
             type="submit"
+            className="bg-blue-600 w-full rounded-full py-2 text-white font-semibold hover:bg-blue-700"
           >
-            <span>Login</span>
+            <span>Log In</span>
+            
           </button>
+          <br/><br/>
           <p className="text-[14px]">
             Don't have an Account?{" "}
             <Link to={"/"}>
@@ -196,11 +81,20 @@ const Login = () => {
               <button className="font-semibold cursor-pointer">Login</button>
             </Link>
           </p>
-          {loginStatus && <p className="mt-4 text-black">{loginStatus}</p>}
+          {loginStatus && <p className="mt-4 text-red-500">{loginStatus}</p>}
+          {/* <div className="flex flex-col items-center pt-4">
+            <span className="text-sm">New User?</span>
+            <Link
+              to="/register"
+              className="text-sm font-semibold text-blue-400 hover:text-blue-600"
+            >
+              Register Here
+            </Link>
+          </div> */}
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
