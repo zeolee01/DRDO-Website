@@ -5,7 +5,7 @@ import axios from "axios";
 const Notice = () => {
   const [notices, setNotices] = useState([]);
   const [error, setError] = useState(null);
-  const [newNotice, setNewNotice] = useState({ content: "", type: "" });
+  const [newNotice, setNewNotice] = useState({ content: "", type: "" }); 
 
   useEffect(() => {
     const fetchNotice = async () => {

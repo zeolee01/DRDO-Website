@@ -1,52 +1,55 @@
-import React, { useState, useEffect } from "react"
-import { FaUser, FaLock } from "react-icons/fa"
-import { Link, useNavigate } from "react-router-dom"
-import Axios from "axios"
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { FaUser, FaLock } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import Axios from "axios";
+import { setUsername } from "./actions/userActions";
 
-const Login = () => {
-  const [loginUserName, setLoginUserName] = useState("")
-  const [loginPassword, setLoginPassword] = useState("")
-  const [loginStatus, setLoginStatus] = useState("")
-  const [isLoading, setIsLoading] = useState(false) // State for loading
-  const navigateTo = useNavigate()
+const EmployeeLogin = () => {
+  const [loginUserName, setLoginUserName] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [loginStatus, setLoginStatus] = useState("");
+  // const [isLoading, setIsLoading] = useState(false); // State for loading
+  const navigateto = useNavigate();
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (loginStatus) {
-      const timer = setTimeout(() => {
-        setLoginStatus("")
-      }, 3000) // Clear the message after 3 seconds
+  // useEffect(() => {
+  //   if (loginStatus) {
+  //     const timer = setTimeout(() => {
+  //       setLoginStatus("");
+  //     }, 3000); // Clear the message after 3 seconds
 
-      return () => clearTimeout(timer) // Clear the timeout if the component unmounts
-    }
-  }, [loginStatus])
+  //     return () => clearTimeout(timer); // Clear the timeout if the component unmounts
+  //   }
+  // }, [loginStatus]);
 
   const loginUser = async (e) => {
-    e.preventDefault()
-    setIsLoading(true) // Set loading state to true
-
+    e.preventDefault();
+    // setIsLoading(true); // Set loading state to true
+  
     try {
       const response = await Axios.post("http://localhost:3002/employeelogin", {
         LoginUserName: loginUserName,
         LoginPassword: loginPassword,
-      })
-
+      });
+  
       if (response.data.message) {
-        navigateTo("/")
-        setLoginStatus(response.data.message)
-        setLoginPassword("")
+        setLoginStatus(response.data.message);
+        setLoginPassword("");
+        setLoginUserName("");
       } else {
-        navigateTo("/employeedashboard")
-        setLoginStatus("Login successful")
-        setLoginPassword("")
-        setLoginUserName("")
+        dispatch(setUsername(loginUserName)); // Set username in Redux store
+        navigateto("/employeedashboard");
+        setLoginStatus("Login successful");
+        setLoginPassword("");
+        setLoginUserName("");
       }
     } catch (error) {
-      console.error("There was an error logging in!", error)
-      setLoginStatus("An error occurred during login")
-    } finally {
-      setIsLoading(false)
-    }
-  }
+      console.error("There was an error logging in!", error);
+      setLoginStatus("An error occurred during login");
+    } 
+  };
+  
 
   return (
     <div className="h-[100vh] flex flex-col items-center bg-background bg-cover justify-center text-white font-font-1">
@@ -76,12 +79,13 @@ const Login = () => {
             <FaLock className="absolute top-[35%] right-3" />
           </div>
           <button
-            className="my-4 py-2 w-full rounded-full bg-blue-600"
             type="submit"
-            disabled={isLoading}
+            className="bg-blue-600 w-full rounded-full py-2 text-white font-semibold hover:bg-blue-700"
           >
-            {isLoading ? "Loading..." : "Login"}
+            <span>Log In</span>
+            
           </button>
+          <br/><br/>
           <p className="text-[14px]">
             Don't have an Account?{" "}
             <Link to={"/"}>
@@ -98,7 +102,7 @@ const Login = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default EmployeeLogin;

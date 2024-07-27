@@ -15,9 +15,7 @@ const ProfileDropDown = () => {
         <Link className="text-black hover:translate-x-2 transition-transform duration-200">
           Profile
         </Link>
-        <Link className="text-black hover:translate-x-2 transition-transform duration-200">
-          Edit
-        </Link>
+       
         <div className="relative">
           <Link
             to="#"

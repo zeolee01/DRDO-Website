@@ -126,5 +126,43 @@ app.delete("/deletenotice/:id", (req, res) => {
   })
 })
 
-// upload image into corsal
-const storage= multer.
+
+// Endpoint to add or update About Us content
+app.post("/addabout", (req, res) => {
+  const { id, content } = req.body;
+
+  if (id) {
+    // Update existing content
+    const SQL = "UPDATE about SET content = ? WHERE id = ?";
+    const values = [content, id];
+    db.query(SQL, values, (err, results) => {
+      if (err) {
+        res.status(500).send({ error: err });
+      } else {
+        res.status(200).send({ id, content });
+      }
+    });
+  } else {
+    // Add new content
+    const SQL = "INSERT INTO about (content) VALUES (?)";
+    const values = [content];
+    db.query(SQL, values, (err, results) => {
+      if (err) {
+        res.status(500).send({ error: err });
+      } else {
+        res.status(201).send({ id: results.insertId, content });
+      }
+    });
+  }
+});
+
+app.get("/getabout", (req, res) => {
+  const SQL = "SELECT * FROM about ORDER BY id DESC";
+  db.query(SQL, (err, results) => {
+    if (err) {
+      res.status(500).send({ error: err });
+    } else {
+      res.status(200).send(results);
+    }
+  });
+});

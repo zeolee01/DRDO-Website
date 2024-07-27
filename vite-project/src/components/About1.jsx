@@ -1,6 +1,6 @@
 import React from "react"
 import NavBar from "./Admin/NavBar"
-import About from "./About"
+import About from "./Admin/About"
 import Footer from "./Footer"
 
 const About1 = () => {
