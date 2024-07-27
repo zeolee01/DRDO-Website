@@ -11,6 +11,7 @@ import About1 from "./components/About1";
 import FileUpload from "./components/Admin/FileUpload";
 import About2 from "./components/About2";
 
+
 const pageVariants = {
   initial: { opacity: 0, y: 20 },
   in: { opacity: 1, y: 0 },

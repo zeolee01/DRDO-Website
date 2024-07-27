@@ -7,6 +7,20 @@ const path = require("path")
 
 app.use(express.json())
 app.use(cors())
+app.use(express.static('public')); //For image fetching
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/images')
+  },
+  filename: (req, file, cb)=> {
+    cb(null,file.fieldname + "_" + Date.now() + path.extname(file.originalname));
+  }
+})
+
+const upload = multer ({
+  storage: storage
+})
 
 const db = mysql.createConnection({
   user: "root",
@@ -22,6 +36,34 @@ db.connect((err) => {
   }
   console.log("Connected to the database")
 })
+
+//For image path uploading on database
+app.post('/upload',upload.single('image'),(req,res)=>{
+  const image = req.file.filename;
+  const sql = "INSERT INTO images (image) VALUES (?)";
+  const values = [image]
+  db.query(sql, values, (err,results)=>{
+    if (err) {
+      res.status(500).send({ error: err })
+    } else {
+      // console.log("User inserted successfully!")
+      res.status(201).send({ message: "Image added!" })
+    }
+  })
+})
+
+app.get('/', (req,res)=>{
+  const sql = "SELECT * from images";
+  db.query(sql, (err,result)=> {
+    if(err){
+      return res.json("Error");
+    }
+    else{
+      return res.json(result);
+    }
+  })
+})
+
 
 app.listen(3002, () => {
   console.log("Server is running on port 3002")
@@ -166,3 +208,5 @@ app.get("/getabout", (req, res) => {
     }
   });
 });
+
+
