@@ -4,6 +4,7 @@ import Croucel from "../Croucel"
 import Notice from "./Noitce"
 import NavBar from "./NavBar"
 import Footer from "../Footer"
+import ImageUpload from "../ImageUpload"
 
 const pageVariants = {
   initial: {
@@ -39,6 +40,7 @@ const Home = () => {
       >
         <Croucel />
       </motion.div>
+      <ImageUpload />
       <motion.div
         initial="initial"
         animate="in"

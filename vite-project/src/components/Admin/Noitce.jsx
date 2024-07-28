@@ -1,70 +1,72 @@
-import React, { useState, useEffect } from "react";
-import "../../index.css";
-import axios from "axios";
+import React, { useState, useEffect } from "react"
+import "../../index.css"
+import axios from "axios"
 
 const Notice = () => {
-  const [notices, setNotices] = useState([]);
-  const [error, setError] = useState(null);
-  const [newNotice, setNewNotice] = useState({ content: "", type: "" }); 
+  const [notices, setNotices] = useState([])
+  const [error, setError] = useState(null)
+  const [newNotice, setNewNotice] = useState({ content: "", type: "" })
 
   useEffect(() => {
     const fetchNotice = async () => {
       try {
-        const response = await axios.get("http://localhost:3002/getnotice");
-        setNotices(response.data);
+        const response = await axios.get("http://localhost:3002/getnotice")
+        setNotices(response.data)
       } catch (error) {
-        console.error(`error fetching notices:`, error);
-        setError(error.message);
+        console.error(`error fetching notices:`, error)
+        setError(error.message)
       }
-    };
-    fetchNotice();
-  }, [notices]);
+    }
+    fetchNotice()
+  }, [notices])
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewNotice({ ...newNotice, [name]: value });
-  };
+    const { name, value } = e.target
+    setNewNotice({ ...newNotice, [name]: value })
+  }
 
   const addNotice = async (e) => {
-    e.preventDefault();
-    const { content: newNoti, type: newTy } = newNotice;
-    setError(null);
+    e.preventDefault()
+    const { content: newNoti, type: newTy } = newNotice
+    setError(null)
     try {
       const response = await axios.post("http://localhost:3002/addnotice", {
         content: newNoti,
         type: newTy.toUpperCase(),
-      });
+      })
       if (!response.ok) {
-        throw new Error(`Failed to create notice: ${response.statusText}`);
+        throw new Error(`Failed to create notice: ${response.statusText}`)
       }
-      setNewNotice({ content: "", type: "" });
-      setNotices([...notices, response.data]);
-      await fetchNotice();
+      setNewNotice({ content: "", type: "" })
+      setNotices([...notices, response.data])
+      await fetchNotice()
     } catch (error) {
-      console.error("There was an error creating the notice:", error);
+      console.error("There was an error creating the notice:", error)
       if (error.response && error.response.data) {
-        setError(error.response.data.message);
+        setError(error.response.data.message)
       } else {
-        setError("There was a network error or unexpected issue.");
+        setError("There was a network error or unexpected issue.")
       }
     }
-  };
+  }
 
   const removeNotice = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:3002/deletenotice/${id}`);
+      const response = await axios.delete(
+        `http://localhost:3002/deletenotice/${id}`
+      )
       if (!response.ok) {
-        throw new Error(`Failed to delete notice: ${response.statusText}`);
+        throw new Error(`Failed to delete notice: ${response.statusText}`)
       }
-      console.log(response.data.message + " (Notice deleted!)");
-      setNotices(notices.filter((notice) => notice.id !== id));
+      console.log(response.data.message + " (Notice deleted!)")
+      setNotices(notices.filter((notice) => notice.id !== id))
     } catch (error) {
-      console.error("There was an error deleting the notice:", error);
+      console.error("There was an error deleting the notice:", error)
     }
-  };
+  }
 
   return (
-    <div className="py-20 w-full notice-background font-titillium">
+    <div className="py-6 w-full notice-background font-titillium">
       <h1 className="text-black text-4xl text-center pt-5 py-10 rounded-lg">
         Notifications
       </h1>
@@ -134,7 +136,7 @@ const Notice = () => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Notice;
+export default Notice

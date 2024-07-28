@@ -1,26 +1,45 @@
-import React, { useState, useEffect } from "react";
-import img1 from "../assets/Croucel/croucel1.jpg";
-import img2 from "../assets/Croucel/croucel2.jpg";
-import img3 from "../assets/Croucel/croucel3.jpg";
-import img4 from "../assets/Croucel/croucel4.jpg";
+import React, { useState, useEffect } from "react"
+import axios from "axios"
 
 const Croucel = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const images = [img1, img2, img3,img4];
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [data, setData] = useState(null)
+  const [isEmpty, setIsEmpty] = useState(false)
+  const [images, setImages] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3002/")
+        if (response.data.length === 0) {
+          setIsEmpty(true)
+        } else {
+          setData(response.data)
+          setImages(response.data.map((item) => item.image))
+          setIsEmpty(false)
+        }
+      } catch (err) {
+        console.error(err)
+      }
+    }
+    fetchData()
+  }, [])
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000); // Change image every 3 seconds
+      setActiveIndex((prevIndex) => (prevIndex + 1) % images.length)
+    }, 3000) // Change image every 3 seconds
 
-    return () => clearInterval(interval);
-  }, [images.length]);
+    return () => clearInterval(interval)
+  }, [images.length])
 
   return (
-    <div className="w-full h-96"> {/* Set a fixed height for the carousel */}
+    <div className="w-full h-96">
+      {" "}
+      {/* Set a fixed height for the carousel */}
       <div
         id="carouselExampleIndicators"
-        className="carousel slide h-full" // Ensure full height
+        className="carousel slide h-full"
         data-coreui-ride="true"
       >
         <div className="carousel-indicators">
@@ -37,20 +56,25 @@ const Croucel = () => {
             ></button>
           ))}
         </div>
-        <div className="carousel-inner h-full"> {/* Set full height for inner */}
+        {/* -------------- */}
+        <div className="carousel-inner h-full">
           {images.map((image, index) => (
             <div
               key={index}
-              className={`carousel-item ${index === activeIndex ? "active" : ""} w-full h-full`} // Set full height for item
+              className={`carousel-item ${
+                index === activeIndex ? "active" : ""
+              } w-full h-full`}
             >
               <img
-                src={image}
-                className="h-full w-full object-cover" // Ensure image covers the container
+                src={`http://localhost:3002/images/` + image}
+                className="h-full w-full object-cover"
                 alt={`Carousel slide ${index + 1}`}
               />
             </div>
           ))}
         </div>
+
+        {/* buttons */}
         <button
           className="carousel-control-prev"
           type="button"
@@ -62,8 +86,12 @@ const Croucel = () => {
             )
           }
         >
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span
+            className="carousel-control-prev-icon"
+            aria-hidden="true"
+          ></span>
         </button>
+        {/* next button */}
         <button
           className="carousel-control-next"
           type="button"
@@ -73,11 +101,14 @@ const Croucel = () => {
             setActiveIndex((prevIndex) => (prevIndex + 1) % images.length)
           }
         >
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+          <span
+            className="carousel-control-next-icon"
+            aria-hidden="true"
+          ></span>
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Croucel;
+export default Croucel

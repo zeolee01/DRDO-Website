@@ -136,21 +136,6 @@ function AnimatedRoutes() {
                 </motion.div>
               }
             />
-
-            <Route
-              path="fileupload"
-              element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={pageTransition}
-                >
-                  <ImageUp />
-                </motion.div>
-              }
-            />
           </Route>
         </Routes>
       </AnimatePresence>
