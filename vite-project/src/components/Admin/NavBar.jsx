@@ -49,21 +49,13 @@ const NavBar = () => {
             About
           </li>
         </Link>
-        <Link to="/admin/admin" onClick={handleClick}>
-          <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
-            Admin
-          </li>
-        </Link>
-        <Link to="/admin/employee" onClick={handleClick}>
+        
+        <Link to="/admin/EmployeeRoute" onClick={handleClick}>
           <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
             Employee
           </li>
         </Link>
-        <Link to="/admin/edit" onClick={handleClick}>
-          <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
-            Edit
-          </li>
-        </Link>
+        
         <Link to="/admin/notice" onClick={handleClick}>
           <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
             Notice
@@ -100,24 +92,14 @@ const NavBar = () => {
               >
                 About
               </Link>
+              
               <Link
-                to="/admin/admin"
-                className="text-black hover:text-emerald-200 transition border-teal-950 hover:border-emerald-200 cursor-pointer"
-              >
-                Admin
-              </Link>
-              <Link
-                to="/admin/employee"
+                to="/admin/EmployeeRoute"
                 className="text-black hover:text-emerald-200 transition border-teal-950 hover:border-emerald-200 cursor-pointer"
               >
                 Employee
               </Link>
-              <Link
-                to="/admin/edit"
-                className="text-black hover:text-emerald-200 transition border-teal-950 hover:border-emerald-200 cursor-pointer"
-              >
-                Edit
-              </Link>
+            
               {/* <Link
                 to="/admin/notice"
                 className="text-black hover:text-emerald-200 transition border-teal-950 hover:border-emerald-200 cursor-pointer"
