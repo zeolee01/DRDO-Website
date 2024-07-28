@@ -9,7 +9,6 @@ import EmployeeLogin from "./components/Employee/Login"
 import EmployeeDashboard from "./components/Employee/Dashboard"
 import About1 from "./components/About1"
 import About2 from "./components/About2"
-import ImageUp from "./components/ImageUpload"
 import PrivateRoutes from "./PrivateRoutes"
 import PrivateRouteEmp from "./PrivateRouteEmp"
 import EmployeeRoute from "./components/Admin/EmployeeRoute"
@@ -139,7 +138,7 @@ function AnimatedRoutes() {
             />
 
             <Route
-              path="fileupload"
+              path="employeeroute"
               element={
                 <motion.div
                   initial="initial"
@@ -148,7 +147,7 @@ function AnimatedRoutes() {
                   variants={pageVariants}
                   transition={pageTransition}
                 >
-                  <ImageUp />
+                  <EmployeeRoute />
                 </motion.div>
               }
             />
