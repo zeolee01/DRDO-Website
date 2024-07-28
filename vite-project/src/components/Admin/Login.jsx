@@ -1,38 +1,42 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate, Link } from "react-router-dom";
-import { FaUser, FaLock } from "react-icons/fa";
-import Axios from "axios";
-import { setUsername } from "./actions/userActions";
+import React, { useState, useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { useNavigate, Link } from "react-router-dom"
+import { FaUser, FaLock } from "react-icons/fa"
+import Axios from "axios"
+import { setUsername } from "./actions/userActions"
 
-const Login = () => {
-  const [loginUserName, setLoginUserName] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
-  const [loginStatus, setLoginStatus] = useState("");
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+const IsLogin = () => {
+  const [loginUserName, setLoginUserName] = useState("")
+  const [loginPassword, setLoginPassword] = useState("")
+  const [loginStatus, setLoginStatus] = useState("")
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  useEffect(() => {
+    localStorage.setItem("AdminLoggedIn", "false")
+  }, [])
 
   const loginUser = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
       const response = await Axios.post("http://localhost:3002/adminlogin", {
         LoginUserName: loginUserName,
         LoginPassword: loginPassword,
-      });
+      })
 
       if (response.data.message) {
-        setLoginStatus(response.data.message);
-        setLoginPassword("");
-        setLoginUserName("");
+        setLoginStatus(response.data.message)
+        setLoginPassword("")
+        setLoginUserName("")
       } else {
-        dispatch(setUsername(loginUserName)); // Set username in Redux store
-        navigate("/admindashboard");
+        dispatch(setUsername(loginUserName)) // Set username in Redux store
+        navigate("/admin/admindashboard")
+        localStorage.setItem("AdminLoggedIn", "true")
       }
     } catch (error) {
-      console.error("There was an error logging in!", error);
-      setLoginStatus("An error occurred during login");
+      console.error("There was an error logging in!", error)
+      setLoginStatus("An error occurred during login")
     }
-  };
+  }
 
   return (
     <div className="h-screen flex items-center justify-center bg-background bg-cover text-white font-font-1">
@@ -66,9 +70,9 @@ const Login = () => {
             className="bg-blue-600 w-full rounded-full py-2 text-white font-semibold hover:bg-blue-700"
           >
             <span>Log In</span>
-            
           </button>
-          <br/><br/>
+          <br />
+          <br />
           <p className="text-[14px]">
             Don't have an Account?{" "}
             <Link to={"/"}>
@@ -82,19 +86,10 @@ const Login = () => {
             </Link>
           </p>
           {loginStatus && <p className="mt-4 text-red-500">{loginStatus}</p>}
-          {/* <div className="flex flex-col items-center pt-4">
-            <span className="text-sm">New User?</span>
-            <Link
-              to="/register"
-              className="text-sm font-semibold text-blue-400 hover:text-blue-600"
-            >
-              Register Here
-            </Link>
-          </div> */}
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default IsLogin

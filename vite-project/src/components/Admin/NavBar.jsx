@@ -1,77 +1,77 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { FaTimes } from "react-icons/fa";
-import { CiMenuFries } from "react-icons/ci";
-import ProfileDropDown from "../Admin/ProfileDropDown copy";
-import user from "../../assets/user.png";
-import DRDO from "../../assets/drdo-logo.png";
+import React, { useState, useEffect, useRef } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { Link } from "react-router-dom"
+import { FaTimes } from "react-icons/fa"
+import { CiMenuFries } from "react-icons/ci"
+import ProfileDropDown from "../Admin/ProfileDropDown copy"
+import user from "../../assets/user.png"
+import DRDO from "../../assets/drdo-logo.png"
 
 const NavBar = () => {
-  console.log('NavBar rendered');
+  console.log("NavBar rendered")
 
-  const [openProfile, setOpenProfile] = useState(false);
-  const [click, setClick] = useState(false);
-  const dropdownRef = useRef(null);
-  const username = useSelector((state) => state.user.username); // Get username from Redux store
+  const [openProfile, setOpenProfile] = useState(false)
+  const [click, setClick] = useState(false)
+  const dropdownRef = useRef(null)
+  const username = useSelector((state) => state.user.username)
 
   const handleClick = () => {
-    setClick(!click);
-  };
+    setClick(!click)
+  }
 
   const toggleProfileDropdown = () => {
-    setOpenProfile(!openProfile);
-  };
+    setOpenProfile(!openProfile)
+  }
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setOpenProfile(false);
+      setOpenProfile(false)
     }
-  };
+  }
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside)
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [])
 
   const content = (
     <div className="lg:hidden block absolute top-16 w-full left-0 right-0 bg-white transition z-40">
       <ul className="text-center text-xl p-20 font-titillium">
-        <Link to="/admindashboard" onClick={handleClick}>
+        <Link to="/admin/admindashboard" onClick={handleClick}>
           <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
             Home
           </li>
         </Link>
-        <Link to="/about1" onClick={handleClick}>
+        <Link to="/admin/about1" onClick={handleClick}>
           <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
             About
           </li>
         </Link>
-        <Link to="/admin" onClick={handleClick}>
+        <Link to="/admin/admin" onClick={handleClick}>
           <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
             Admin
           </li>
         </Link>
-        <Link to="/employee" onClick={handleClick}>
+        <Link to="/admin/employee" onClick={handleClick}>
           <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
             Employee
           </li>
         </Link>
-        <Link to="/edit" onClick={handleClick}>
+        <Link to="/admin/edit" onClick={handleClick}>
           <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
             Edit
           </li>
         </Link>
-        <Link to="/notice" onClick={handleClick}>
+        <Link to="/admin/notice" onClick={handleClick}>
           <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
             Notice
           </li>
         </Link>
       </ul>
     </div>
-  );
+  )
 
   return (
     <nav className="bg-white font-titillium relative z-50">
@@ -89,41 +89,41 @@ const NavBar = () => {
           <div className="flex-10">
             <ul className="flex gap-8 mr-16 text-[18px]">
               <Link
-                to="/admindashboard"
+                to="/admin/admindashboard"
                 className="text-black hover:text-emerald-200 transition border-gray-950 hover:border-emerald-200 cursor-pointer"
               >
                 Home
               </Link>
               <Link
-                to="/about1"
+                to="/admin/about1"
                 className="text-black hover:text-emerald-200 transition border-teal-950 hover:border-emerald-200 cursor-pointer"
               >
                 About
               </Link>
               <Link
-                to="/admin"
+                to="/admin/admin"
                 className="text-black hover:text-emerald-200 transition border-teal-950 hover:border-emerald-200 cursor-pointer"
               >
                 Admin
               </Link>
               <Link
-                to="/employee"
+                to="/admin/employee"
                 className="text-black hover:text-emerald-200 transition border-teal-950 hover:border-emerald-200 cursor-pointer"
               >
                 Employee
               </Link>
               <Link
-                to="/edit"
+                to="/admin/edit"
                 className="text-black hover:text-emerald-200 transition border-teal-950 hover:border-emerald-200 cursor-pointer"
               >
                 Edit
               </Link>
-              <Link
-                to="/notice"
+              {/* <Link
+                to="/admin/notice"
                 className="text-black hover:text-emerald-200 transition border-teal-950 hover:border-emerald-200 cursor-pointer"
               >
                 Notice
-              </Link>
+              </Link> */}
             </ul>
           </div>
 
@@ -152,7 +152,7 @@ const NavBar = () => {
         </button>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default NavBar;
+export default NavBar

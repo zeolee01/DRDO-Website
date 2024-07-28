@@ -7,19 +7,22 @@ const path = require("path")
 
 app.use(express.json())
 app.use(cors())
-app.use(express.static('public')); //For image fetching
+app.use(express.static("public")) //For image fetching
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'public/images')
+    cb(null, "public/images")
   },
-  filename: (req, file, cb)=> {
-    cb(null,file.fieldname + "_" + Date.now() + path.extname(file.originalname));
-  }
+  filename: (req, file, cb) => {
+    cb(
+      null,
+      file.fieldname + "_" + Date.now() + path.extname(file.originalname)
+    )
+  },
 })
 
-const upload = multer ({
-  storage: storage
+const upload = multer({
+  storage: storage,
 })
 
 const db = mysql.createConnection({
@@ -36,34 +39,6 @@ db.connect((err) => {
   }
   console.log("Connected to the database")
 })
-
-//For image path uploading on database
-app.post('/upload',upload.single('image'),(req,res)=>{
-  const image = req.file.filename;
-  const sql = "INSERT INTO images (image) VALUES (?)";
-  const values = [image]
-  db.query(sql, values, (err,results)=>{
-    if (err) {
-      res.status(500).send({ error: err })
-    } else {
-      // console.log("User inserted successfully!")
-      res.status(201).send({ message: "Image added!" })
-    }
-  })
-})
-
-app.get('/', (req,res)=>{
-  const sql = "SELECT * from images";
-  db.query(sql, (err,result)=> {
-    if(err){
-      return res.json("Error");
-    }
-    else{
-      return res.json(result);
-    }
-  })
-})
-
 
 app.listen(3002, () => {
   console.log("Server is running on port 3002")
@@ -168,45 +143,67 @@ app.delete("/deletenotice/:id", (req, res) => {
   })
 })
 
-
 // Endpoint to add or update About Us content
 app.post("/addabout", (req, res) => {
-  const { id, content } = req.body;
+  const { id, content } = req.body
 
   if (id) {
     // Update existing content
-    const SQL = "UPDATE about SET content = ? WHERE id = ?";
-    const values = [content, id];
+    const SQL = "UPDATE about SET content = ? WHERE id = ?"
+    const values = [content, id]
     db.query(SQL, values, (err, results) => {
       if (err) {
-        res.status(500).send({ error: err });
+        res.status(500).send({ error: err })
       } else {
-        res.status(200).send({ id, content });
+        res.status(200).send({ id, content })
       }
-    });
+    })
   } else {
     // Add new content
-    const SQL = "INSERT INTO about (content) VALUES (?)";
-    const values = [content];
+    const SQL = "INSERT INTO about (content) VALUES (?)"
+    const values = [content]
     db.query(SQL, values, (err, results) => {
       if (err) {
-        res.status(500).send({ error: err });
+        res.status(500).send({ error: err })
       } else {
-        res.status(201).send({ id: results.insertId, content });
+        res.status(201).send({ id: results.insertId, content })
       }
-    });
+    })
   }
-});
+})
 
 app.get("/getabout", (req, res) => {
-  const SQL = "SELECT * FROM about ORDER BY id DESC";
+  const SQL = "SELECT * FROM about ORDER BY id DESC"
   db.query(SQL, (err, results) => {
     if (err) {
-      res.status(500).send({ error: err });
+      res.status(500).send({ error: err })
     } else {
-      res.status(200).send(results);
+      res.status(200).send(results)
     }
-  });
-});
+  })
+})
 
+//For image path uploading on database
+app.post("/upload", upload.single("image"), (req, res) => {
+  const image = req.file.filename
+  const sql = "INSERT INTO images (image) VALUES (?)"
+  const values = [image]
+  db.query(sql, values, (err, results) => {
+    if (err) {
+      res.status(500).send({ error: err })
+    } else {
+      res.status(201).send({ message: "Image added!" })
+    }
+  })
+})
 
+app.get("/", (req, res) => {
+  const sql = "SELECT * from images"
+  db.query(sql, (err, result) => {
+    if (err) {
+      return res.json("Error")
+    } else {
+      return res.json(result)
+    }
+  })
+})
