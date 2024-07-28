@@ -207,3 +207,25 @@ app.get("/", (req, res) => {
     }
   })
 })
+
+
+//Fetching the employee database for employee card display
+app.get("/employees", (req, res) => {
+  const SQL = "SELECT id, username FROM employee";
+  db.query(SQL, (err, results) => {
+    if (err) {
+      res.status(500).send({ error: err });
+    } else {
+      res.status(200).send(results);
+    }
+  });
+});
+
+//Admin delete Employee option
+app.delete('/employees/:id', (req, res) => {
+  const { id } = req.params;
+  db.query('DELETE FROM employees WHERE id = ?', [id], (err, result) => {
+    if (err) throw err;
+    res.sendStatus(204);
+  });
+});

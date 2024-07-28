@@ -1,0 +1,108 @@
+.profile-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* Adds space between the cards */
+  background-image: url('/src/assets/bg3.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 20px;
+}
+
+.profile-card-container .Card {
+  width: 300px;
+  height: 300px; /* Adjusted height to match previous styles */
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 1px 10px 1px black;
+  overflow: hidden;
+}
+
+.profile-card-container .upper-container {
+  height: 100px;
+  background: linear-gradient(to left, #0b0a0d, #3f3f3f);
+}
+
+.profile-card-container .image-container img {
+  background: white;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  padding: 5px;
+  transform: translate(95px, 45px);
+}
+
+.profile-card-container img {
+  border: 2px solid #030103;
+}
+
+.profile-card-container .lower-container {
+  margin-top: 60px;
+  height: 300px;
+  background: white;
+  text-align: center;
+  font-family: 'Titillium web', sans-serif;
+}
+
+.profile-card-container .lower-container h3,
+.profile-card-container .lower-container h4,
+.profile-card-container .lower-container p {
+  margin: 0;
+  padding: 0;
+}
+
+.profile-card-container .lower-container h3 {
+  color: #2f2d2e;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.profile-card-container .lower-container h4 {
+  color: #030103;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.profile-card-container .lower-container p {
+  margin: 1rem;
+  font-weight: 300;
+  color: #2f2d2e;
+  font-size: 0.9rem;
+  text-align: justify;
+}
+
+.profile-card-container button {
+  margin: 1rem;
+  margin-top: 0;
+  color: #2f2d2e;
+  font: bold;
+  background-color: white;
+  border: 2px solid #8e00b9;
+  padding: 0.6rem;
+  border-radius: 6px;
+  transition-duration: 0.5s;
+  animation: ease-in-out;
+}
+
+.profile-card-container button:hover {
+  background-image: linear-gradient(to left, #0b0a0d, #3f3f3f);
+  transform: scale(1.2);
+  border: none;
+  color: white;
+}
+
+.profile-card-container .delete-button {
+  background-color: black;
+  color: gray;
+  border: none;
+  padding: 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 1rem; /* Added margin-top for padding above the button */
+}
+
+.profile-card-container .delete-button:hover {
+  background-color: darkgray;
+  color: white;
+}
