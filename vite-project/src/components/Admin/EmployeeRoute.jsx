@@ -7,9 +7,7 @@ const EmployeeRoute = () => {
   return (
     <div>
       <NavBar />
-    
       <ProfileCard />
-    
       <Footer />
     </div>
   )
