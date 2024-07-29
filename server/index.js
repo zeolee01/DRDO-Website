@@ -4,6 +4,7 @@ const mysql = require("mysql")
 const cors = require("cors")
 const multer = require("multer")
 const path = require("path")
+const xlsx = require("xlsx") //Driver for Xlsx files
 
 app.use(express.json())
 app.use(cors())
@@ -229,3 +230,45 @@ app.delete('/employees/:id', (req, res) => {
     res.sendStatus(204);
   });
 });
+
+//setup for uploading xlsx file into the database
+
+//Open Excel File - Use First Worksheet
+let workbook = xlsx.readFile("LibraryRecords.xlsx"),
+  worksheet = workbook.Sheets[workbook.SheetNames[0]],
+  range = xlsx.utils.decode_range(worksheet["!ref"]);
+
+//Import Excel File
+for( let row = range.s.r; row <= range.e.r; row++){
+  //Read Cells
+  let data =[];
+  for ( let col = range.s.c; col <= range.e.c; col++){
+    let cell = worksheet[xlsx.utils.encode_cell({r:row , c:col})];
+    data.push(cell.v);
+  }
+
+  //Insert into Database
+  let sql = "INSERT INTO `Library` (`BooksName`,`Availability`) VALUES (?,?)"
+  db.query(sql,data,(err,results,fields)=> {
+    if(err){
+      return console.error(err.message);
+    }
+    console.log("USER ID:"+ results.insertId);
+  });
+}
+
+// Search for a book by name
+app.get("/search", (req, res) => {
+  const bookName = req.query.name;
+  const SQL = "SELECT * FROM Library WHERE BooksName = ?";
+  db.query(SQL, [bookName], (err, results) => {
+    if (err) {
+      res.status(500).send({ error: err.message });
+    } else if (results.length > 0) {
+      res.status(200).send(results[0]);
+    } else {
+      res.status(404).send({ message: "Book not found" });
+    }
+  });
+});
+

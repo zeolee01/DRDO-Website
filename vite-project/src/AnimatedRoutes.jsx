@@ -13,6 +13,7 @@ import ImageUp from "./components/ImageUpload"
 import PrivateRoutes from "./PrivateRoutes"
 import PrivateRouteEmp from "./PrivateRouteEmp"
 import EmployeeRoute from "./components/Admin/EmployeeRoute"
+import LibRouting from "./components/LibRouting"
 
 const pageVariants = {
   initial: { opacity: 0, y: 20 },
@@ -149,6 +150,34 @@ function AnimatedRoutes() {
                   transition={pageTransition}
                 >
                   <ImageUp />
+                </motion.div>
+              }
+            />
+            <Route
+              path="EmployeeRoute"
+              element={
+                <motion.div
+                  initial="initial"
+                  animate="in"
+                  exit="out"
+                  variants={pageVariants}
+                  transition={pageTransition}
+                >
+                  <EmployeeRoute />
+                </motion.div>
+              }
+            />
+            <Route
+              path="LibRouting"
+              element={
+                <motion.div
+                  initial="initial"
+                  animate="in"
+                  exit="out"
+                  variants={pageVariants}
+                  transition={pageTransition}
+                >
+                  <LibRouting />
                 </motion.div>
               }
             />

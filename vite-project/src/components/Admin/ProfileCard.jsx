@@ -71,7 +71,7 @@ function ProfileCard() {
             <h4>{employee.job}</h4>
             {/* <p>{employee.about}</p> */}
             {/* <button className="button">Visit Profile</button> */}
-            <button className="delete-button" onClick={() => handleDelete(employee.id)}>Delete</button>
+            <button className="delete-button font-bold" onClick={() => handleDelete(employee.id)}>Delete</button>
           </div>
         </motion.div>
       ))}

@@ -48,6 +48,11 @@ const NavBar = () => {
             About
           </li>
         </Link>
+        <Link to="LibRouting" onClick={handleClick}>
+          <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
+            Library
+          </li>
+        </Link>
         {/* <Link to="/admin" onClick={handleClick}>
           <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
             Admin
@@ -99,12 +104,12 @@ const NavBar = () => {
               >
                 About
               </Link>
-              {/* <Link
-                to="/admin"
+              <Link
+                to="/emp/LibRouting"
                 className="text-black hover:text-emerald-200 transition border-teal-950 hover:border-emerald-200 cursor-pointer"
               >
-                Admin
-              </Link> */}
+                Library
+              </Link>
             </ul>
           </div>
 

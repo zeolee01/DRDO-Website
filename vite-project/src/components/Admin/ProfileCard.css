@@ -13,14 +13,14 @@
   width: 300px;
   height: 300px; /* Adjusted height to match previous styles */
   background: white;
-  border-radius: 10px;
+  border-radius: 0px;
   box-shadow: 0px 1px 10px 1px black;
   overflow: hidden;
 }
 
 .profile-card-container .upper-container {
   height: 100px;
-  background: linear-gradient(to left, #0b0a0d, #3f3f3f);
+  background: linear-gradient(to left, #0d0a0b, #3f3f3f);
 }
 
 .profile-card-container .image-container img {
@@ -85,7 +85,7 @@
 }
 
 .profile-card-container button:hover {
-  background-image: linear-gradient(to left, #0b0a0d, #3f3f3f);
+  background-image: linear-gradient(to left, #3f3f3f, #0b0a0d);
   transform: scale(1.2);
   border: none;
   color: white;
