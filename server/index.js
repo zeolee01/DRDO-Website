@@ -51,6 +51,11 @@ app.post("/register", (req, res) => {
   const sentUserName = req.body.UserName
   const sentPassword = req.body.Password
 
+  if (!sentEmail || !sentUserName || !sentPassword) {
+    return res.status(400).send({ message: "All fields are required" });
+  }
+
+
   const SQL =
     "INSERT INTO employee (email, username, password) VALUES (?, ?, ?)"
   const values = [sentEmail, sentUserName, sentPassword]
@@ -112,7 +117,7 @@ app.post("/addnotice", (req, res) => {
     if (err) {
       res.status(500).send({ error: err })
     } else {
-      res.status(201).send({ message: "User added!" })
+      res.status(201).send({ message: "Notice added!" })
     }
   })
 })
@@ -267,7 +272,7 @@ app.get("/search", (req, res) => {
     } else if (results.length > 0) {
       res.status(200).send(results[0]);
     } else {
-      res.status(404).send({ message: "Book not found" });
+      res.status(404).send({ message: "Book not found!!!" });
     }
   });
 });

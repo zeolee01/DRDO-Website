@@ -29,7 +29,7 @@ const pageTransition = {
 
 const Home = () => {
   return (
-    <div>
+    <div className="bg-white">
       <NavBar />
       <motion.div
         initial="initial"

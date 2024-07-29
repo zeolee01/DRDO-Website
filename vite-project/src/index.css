@@ -216,3 +216,14 @@ input[type="text"]:focus {
   font-size: 0.9rem;
   color: gray;
 }
+
+
+/* Apply this style to the element with the background image of the Login Page for smooth Loading of background image */
+.fixed-background {
+  background-image: url('./assets/bg1.jpg');
+  background-size: cover; 
+  background-position: center;
+  background-repeat: no-repeat; 
+  background-attachment: fixed; 
+  height: 100vh;
+}

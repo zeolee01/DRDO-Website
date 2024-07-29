@@ -21,6 +21,7 @@ function ImageUpload() {
         }
       })
       .catch((err) => console.log(err))
+    window.location.reload();
   }
 
   return (
@@ -39,7 +40,7 @@ function ImageUpload() {
       </label>
       <button
         onClick={handleUpload}
-        className="ml-2 px-4 py-2 text-white  bg-gray-800 rounded-lg hover:bg-gray-600 focus:outline-none"
+        className="ml-2 px-4 py-2 text-white  bg-gray-800 rounded-lg hover:bg-gray-600 focus:outline-none bg-gradient-to-l from-gray-700 to-black hover:scale-110 hover:bg-gradient-to-l hover:from-gray-800 hover:to-gray-900 border-none text-white transition-transform duration-300 ease-in-out"
       >
         Upload Image
       </button>

@@ -1,45 +1,46 @@
-import React, { useState, useEffect } from "react"
-import { useDispatch } from "react-redux"
-import { useNavigate, Link } from "react-router-dom"
-import { FaUser, FaLock } from "react-icons/fa"
-import Axios from "axios"
-import { setUsername } from "./actions/userActions"
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
+import { FaUser, FaLock } from "react-icons/fa";
+import Axios from "axios";
+import { setUsername } from "./actions/userActions";
 
 const IsLogin = () => {
-  const [loginUserName, setLoginUserName] = useState("")
-  const [loginPassword, setLoginPassword] = useState("")
-  const [loginStatus, setLoginStatus] = useState("")
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const [loginUserName, setLoginUserName] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [loginStatus, setLoginStatus] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   useEffect(() => {
-    localStorage.setItem("AdminLoggedIn", "false")
-  }, [])
+    localStorage.setItem("AdminLoggedIn", "false");
+  }, []);
 
   const loginUser = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
       const response = await Axios.post("http://localhost:3002/adminlogin", {
         LoginUserName: loginUserName,
         LoginPassword: loginPassword,
-      })
+      });
 
       if (response.data.message) {
-        setLoginStatus(response.data.message)
-        setLoginPassword("")
-        setLoginUserName("")
+        setLoginStatus(response.data.message);
+        setLoginPassword("");
+        setLoginUserName("");
       } else {
-        dispatch(setUsername(loginUserName)) // Set username in Redux store
-        navigate("/admin/admindashboard")
-        localStorage.setItem("AdminLoggedIn", "true")
+        dispatch(setUsername(loginUserName)); // Set username in Redux store
+        navigate("/admin/admindashboard");
+        localStorage.setItem("AdminLoggedIn", "true");
       }
     } catch (error) {
-      console.error("There was an error logging in!", error)
-      setLoginStatus("An error occurred during login")
+      console.error("There was an error logging in!", error);
+      setLoginStatus("An error occurred during login");
     }
-  }
+  };
 
   return (
-    <div className="h-screen flex items-center justify-center bg-background bg-cover text-white font-font-1">
+    <div className="h-screen flex items-center justify-center bg-cover text-white font-font-1 fixed-background">
       <div className="bg-blue-600/20 border border-blue-600/20 backdrop-blur-lg rounded-lg px-6 py-6 w-80">
         <h2 className="text-3xl font-bold pb-6 text-center">Admin Login</h2>
         <form className="flex flex-col items-center" onSubmit={loginUser}>
@@ -67,7 +68,7 @@ const IsLogin = () => {
           </div>
           <button
             type="submit"
-            className="bg-blue-600 w-full rounded-full py-2 text-white font-semibold hover:bg-blue-700"
+            className="bg-blue-600 w-full rounded-full py-2 text-white font-semibold hover:bg-blue-700 transition duration-300"
           >
             <span>Log In</span>
           </button>
@@ -89,7 +90,7 @@ const IsLogin = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default IsLogin
+export default IsLogin;

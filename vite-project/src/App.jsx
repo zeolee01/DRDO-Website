@@ -6,7 +6,7 @@ import ReduxProvider from "./components/Admin/store";
 
 function App() {
   return (
-    <div className="h-full w-full pb-5">
+    <div className="h-full w-full pb-5 bg-slate-900">
       <ReduxProvider>
         <Router>
           <AnimatedRoutes />

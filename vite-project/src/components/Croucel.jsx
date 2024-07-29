@@ -34,7 +34,7 @@ const Croucel = () => {
   }, [images.length])
 
   return (
-    <div className="w-full h-96">
+    <div className="w-full h-96 bg-slate-600">
       {" "}
       {/* Set a fixed height for the carousel */}
       <div
