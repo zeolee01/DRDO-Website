@@ -105,6 +105,20 @@ function AnimatedRoutes() {
                 </motion.div>
               }
             />
+            <Route
+              path="librouting"
+              element={
+                <motion.div
+                  initial="initial"
+                  animate="in"
+                  exit="out"
+                  variants={pageVariants}
+                  transition={pageTransition}
+                >
+                  <LibRouting />
+                </motion.div>
+              }
+            />
           </Route>
           {/* admin secure */}
           <Route path="/admin" element={<PrivateRoutes />}>
@@ -149,34 +163,6 @@ function AnimatedRoutes() {
                   transition={pageTransition}
                 >
                   <EmployeeRoute />
-                </motion.div>
-              }
-            />
-            <Route
-              path="EmployeeRoute"
-              element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={pageTransition}
-                >
-                  <EmployeeRoute />
-                </motion.div>
-              }
-            />
-            <Route
-              path="LibRouting"
-              element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={pageTransition}
-                >
-                  <LibRouting />
                 </motion.div>
               }
             />

@@ -1,5 +1,5 @@
 import React from "react"
-import NavBar from "./Admin/NavBar"
+import NavBar from "./Employee/NavBar"
 import Footer from "./Footer"
 import LibRecords from "./LibraryRecords/LibRecords"
 
