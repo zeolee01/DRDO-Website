@@ -29,7 +29,7 @@ const pageTransition = {
 
 const Home = () => {
   return (
-    <div className="bg-white">
+    <div className="h-screen overflow-y-scroll scrollbar always-visible scrollbar-thumb-gray-400 bg-gradient-to-l from-gray-700 to-black ">
       <NavBar />
       <motion.div
         initial="initial"

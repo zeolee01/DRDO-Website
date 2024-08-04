@@ -20,52 +20,6 @@ const Notice = () => {
     fetchNotice()
   }, [notices])
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target
-    setNewNotice({ ...newNotice, [name]: value })
-  }
-
-  const addNotice = async (e) => {
-    e.preventDefault()
-    const { content: newNoti, type: newTy } = newNotice
-    setError(null)
-    try {
-      const response = await axios.post("http://localhost:3002/addnotice", {
-        content: newNoti,
-        type: newTy.toUpperCase(),
-      })
-      if (!response.ok) {
-        throw new Error(`Failed to create notice: ${response.statusText}`)
-      }
-      setNewNotice({ content: "", type: "" })
-      setNotices([...notices, response.data])
-      await fetchNotice()
-    } catch (error) {
-      console.error("There was an error creating the notice:", error)
-      if (error.response && error.response.data) {
-        setError(error.response.data.message)
-      } else {
-        setError("There was a network error or unexpected issue.")
-      }
-    }
-  }
-
-  const removeNotice = async (id) => {
-    try {
-      const response = await axios.delete(
-        `http://localhost:3002/deletenotice/${id}`
-      )
-
-      if (!response.ok) {
-        throw new Error(`Failed to delete notice: ${response.statusText}`)
-      }
-      console.log(response.data.message + " (Notice deleted!)")
-      setNotices(notices.filter((notice) => notice.id !== id))
-    } catch (error) {
-      console.error("There was an error deleting the notice:", error)
-    }
-  }
-
   return (
     <div className="py-20 w-full notice-background font-titillium">
       <h1 className="text-black text-4xl text-center pt-5 py-10 rounded-lg">
@@ -85,15 +39,19 @@ const Notice = () => {
                 <div className="flex items-center">
                   <div
                     className={`type ${
-                      notice.type === "NEW" ? "text-white" : "text-white"
-                    } bg-red-600 rounded-full px-2 py-1`}
+                      notice.type === "URGENT" ? "bg-red-600" : "bg-yellow-500"
+                    } text-white rounded-full px-2 py-1 w-20 justify-center flex`}
                   >
                     {notice.type}
                   </div>
-                  {/* <div>
-                    const timeElapsed = Date.now() const today = new
-                    Date(timeElapsed)
-                  </div> */}
+                  <div className="pl-4">
+                    <p className="italic text-base text-gray-500	">
+                      {notice.time}
+                    </p>
+                    <p className="italic text-sm	text-gray-500">
+                      {notice.date}{" "}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

@@ -6,7 +6,7 @@ import Footer from "../Footer"
 
 const Home = () => {
   return (
-    <div>
+    <div className="h-screen overflow-y-scroll scrollbar always-visible scrollbar-thumb-gray-400 bg-gradient-to-l from-gray-700 to-black ">
       <NavBar />
       <Croucel />
       <Noitce />

@@ -110,8 +110,10 @@ app.post("/employeelogin", (req, res) => {
 app.post("/addnotice", (req, res) => {
   const sentNotice = req.body.content
   const sentType = req.body.type
-  const SQL = "INSERT INTO notice (text, type) VALUES (?, ?)"
-  const values = [sentNotice, sentType]
+  const sendDate = req.body.date
+  const sendTime = req.body.time
+  const SQL = "INSERT INTO notice (text, type, date, time) VALUES (?, ?, ?, ?)"
+  const values = [sentNotice, sentType, sendDate, sendTime]
   db.query(SQL, values, (err, results) => {
     if (err) {
       res.status(500).send({ error: err })

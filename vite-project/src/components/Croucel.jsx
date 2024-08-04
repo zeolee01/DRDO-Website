@@ -7,6 +7,12 @@ const Croucel = () => {
   const [data, setData] = useState([])
   const [isEmpty, setIsEmpty] = useState(false)
   const [isHover, setHover] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
+
+  useEffect(() => {
+    const storedRole = localStorage.getItem("AdminLoggedIn")
+    setIsAdmin(storedRole === "true")
+  }, [])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -98,13 +104,13 @@ const Croucel = () => {
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 onClick={() => handleImgDelete(item.id)}
+                hidden={!isAdmin}
               >
                 <RiDeleteBin5Line />
               </button>
             </div>
           ))}
         </div>
-
         <button
           className="carousel-control-prev w-8 h-8 top-1/2 left-10"
           type="button"
