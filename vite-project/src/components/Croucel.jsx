@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
+import { RiDeleteBin5Line } from "react-icons/ri"
 
 const Croucel = () => {
   const [activeIndex, setActiveIndex] = useState(0)
-  const [data, setData] = useState(null)
+  const [data, setData] = useState([])
   const [isEmpty, setIsEmpty] = useState(false)
-  const [images, setImages] = useState([])
+  const [isHover, setHover] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,7 +16,6 @@ const Croucel = () => {
           setIsEmpty(true)
         } else {
           setData(response.data)
-          setImages(response.data.map((item) => item.image))
           setIsEmpty(false)
         }
       } catch (err) {
@@ -27,23 +27,42 @@ const Croucel = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveIndex((prevIndex) => (prevIndex + 1) % images.length)
+      if (!isHover && data.length > 0) {
+        setActiveIndex((prevIndex) => (prevIndex + 1) % data.length)
+      }
     }, 3000) // Change image every 3 seconds
 
     return () => clearInterval(interval)
-  }, [images.length])
+  }, [isHover, data])
+
+  const handleMouseEnter = () => {
+    setHover(true)
+  }
+
+  const handleMouseLeave = () => {
+    setHover(false)
+  }
+
+  const handleImgDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:3002/deleteimg/${id}`)
+      const updatedData = data.filter((item) => item.id !== id)
+      setData(updatedData)
+      setActiveIndex((prevIndex) => prevIndex % updatedData.length)
+    } catch (error) {
+      console.error("Fail to delete img:", error)
+    }
+  }
 
   return (
     <div className="w-full h-96 bg-slate-600">
-      {" "}
-      {/* Set a fixed height for the carousel */}
       <div
         id="carouselExampleIndicators"
         className="carousel slide h-full"
         data-coreui-ride="true"
       >
         <div className="carousel-indicators">
-          {images.map((_, index) => (
+          {data.map((item, index) => (
             <button
               key={index}
               type="button"
@@ -56,9 +75,13 @@ const Croucel = () => {
             ></button>
           ))}
         </div>
-        {/* -------------- */}
-        <div className="carousel-inner h-full">
-          {images.map((image, index) => (
+
+        <div
+          className="carousel-inner h-full"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          {data.map((item, index) => (
             <div
               key={index}
               className={`carousel-item ${
@@ -66,23 +89,30 @@ const Croucel = () => {
               } w-full h-full`}
             >
               <img
-                src={`http://localhost:3002/images/` + image}
+                src={`http://localhost:3002/images/${item.image}`}
                 className="h-full w-full object-cover"
                 alt={`Carousel slide ${index + 1}`}
               />
+              <button
+                className="bg-red-500 text-white mx-4 my-2 px-3 py-2 rounded-full absolute top-0 right-0"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                onClick={() => handleImgDelete(item.id)}
+              >
+                <RiDeleteBin5Line />
+              </button>
             </div>
           ))}
         </div>
 
-        {/* buttons */}
         <button
-          className="carousel-control-prev"
+          className="carousel-control-prev w-8 h-8 top-1/2 left-10"
           type="button"
           data-coreui-target="#carouselExampleIndicators"
           data-coreui-slide="prev"
           onClick={() =>
             setActiveIndex((prevIndex) =>
-              prevIndex === 0 ? images.length - 1 : prevIndex - 1
+              prevIndex === 0 ? data.length - 1 : prevIndex - 1
             )
           }
         >
@@ -91,14 +121,14 @@ const Croucel = () => {
             aria-hidden="true"
           ></span>
         </button>
-        {/* next button */}
+
         <button
-          className="carousel-control-next"
+          className="carousel-control-next w-8 h-8 top-1/2 right-10"
           type="button"
           data-coreui-target="#carouselExampleIndicators"
           data-coreui-slide="next"
           onClick={() =>
-            setActiveIndex((prevIndex) => (prevIndex + 1) % images.length)
+            setActiveIndex((prevIndex) => (prevIndex + 1) % data.length)
           }
         >
           <span

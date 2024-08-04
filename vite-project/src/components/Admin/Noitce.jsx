@@ -18,7 +18,7 @@ const Notice = () => {
       }
     }
     fetchNotice()
-  }, [notices])
+  }, [])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -48,6 +48,7 @@ const Notice = () => {
         setError("There was a network error or unexpected issue.")
       }
     }
+    window.location.reload()
   }
 
   const removeNotice = async (id) => {
