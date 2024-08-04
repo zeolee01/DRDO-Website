@@ -16,9 +16,9 @@ const ProfileDropDown = () => {
   return (
     <div className="flex flex-col ProfileDropDown">
       <ul className="flex flex-col gap-4 font-titillium">
-        <Link className="text-black hover:translate-x-2 transition-transform duration-200">
+        {/* <Link className="text-black hover:translate-x-2 transition-transform duration-200">
           Profile
-        </Link>
+        </Link> */}
 
         <div className="relative">
           <Link
