@@ -41,7 +41,7 @@ function ImageUpload() {
   }
 
   return (
-    <div className="flex items-center justify-center w-full pt-4 py-2 px-4 notice-background">
+    <div className="flex items-center justify-center w-full pt-4 py-6 px-4 notice-background">
       <label
         htmlFor="fileInput"
         className="flex items-center w-96 border-black bg-white p-2 rounded-md cursor-pointer focus:outline-none"

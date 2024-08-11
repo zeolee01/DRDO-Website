@@ -36,7 +36,7 @@ const Croucel = () => {
       if (!isHover && data.length > 0) {
         setActiveIndex((prevIndex) => (prevIndex + 1) % data.length)
       }
-    }, 3000) // Change image every 3 seconds
+    }, 2000) // Change image every 3 seconds
 
     return () => clearInterval(interval)
   }, [isHover, data])
@@ -61,7 +61,7 @@ const Croucel = () => {
   }
 
   return (
-    <div className="w-full h-96 bg-slate-600">
+    <div className="w-full h-full bg-slate-600">
       <div
         id="carouselExampleIndicators"
         className="carousel slide h-full"

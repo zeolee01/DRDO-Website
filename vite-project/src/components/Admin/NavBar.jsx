@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react"
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { FaTimes } from "react-icons/fa"
 import { CiMenuFries } from "react-icons/ci"
+import { motion } from "framer-motion"
 import ProfileDropDown from "../Admin/ProfileDropDown copy"
 import user from "../../assets/user.png"
 import DRDO from "../../assets/drdo-logo.png"
@@ -36,46 +37,22 @@ const NavBar = () => {
     }
   }, [])
 
-  const content = (
-    <div className="lg:hidden block absolute top-16 w-full left-0 right-0 bg-white transition z-40">
-      <ul className="text-center text-xl p-20 font-titillium">
-        <Link to="/admin/admindashboard" onClick={handleClick}>
-          <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
-            Home
-          </li>
-        </Link>
-        <Link to="/admin/about1" onClick={handleClick}>
-          <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
-            About
-          </li>
-        </Link>
-
-        <Link to="/admin/EmployeeRoute" onClick={handleClick}>
-          <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
-            Employee
-          </li>
-        </Link>
-
-        <Link to="/admin/notice" onClick={handleClick}>
-          <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
-            Notice
-          </li>
-        </Link>
-      </ul>
-    </div>
-  )
-
   return (
     <nav className="bg-white font-titillium relative z-50">
       <div className="h-10vh flex justify-between z-50 text-white lg:py-5 px-20 py-3">
         <div className="flex items-center flex-1">
-          <div className="flex flex-col items-center">
+          <motion.div
+            initial={{ x: "100vw", rotate: 0 }}
+            animate={{ x: 0, rotate: 360 }}
+            transition={{ duration: 2, ease: "easeInOut" }}
+            className="flex flex-col items-center"
+          >
             <img
               className="object-cover max-w-16 max-h-16 h-16 w-16"
               src={DRDO}
               alt="Logo"
             />
-          </div>
+          </motion.div>
         </div>
         <div className="lg:flex lg:flex-1 items-center justify-end font-normal hidden relative">
           <div className="flex-10">
@@ -99,13 +76,12 @@ const NavBar = () => {
               >
                 Employee
               </Link>
-
-              {/* <Link
-                to="/admin/notice"
+              <Link
+                to="/admin/librouting1"
                 className="text-black hover:text-emerald-200 transition border-teal-950 hover:border-emerald-200 cursor-pointer"
               >
-                Notice
-              </Link> */}
+                Library
+              </Link>
             </ul>
           </div>
 

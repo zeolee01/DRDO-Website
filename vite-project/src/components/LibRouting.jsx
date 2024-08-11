@@ -1,7 +1,7 @@
 import React from "react"
 import NavBar from "./Employee/NavBar"
 import Footer from "./Footer"
-import LibRecords from "./LibraryRecords/LibRecords"
+import LibRecords from "./Employee/LibRecords"
 
 const About1 = () => {
   return (

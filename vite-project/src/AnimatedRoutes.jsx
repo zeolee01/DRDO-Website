@@ -13,6 +13,8 @@ import PrivateRoutes from "./PrivateRoutes"
 import PrivateRouteEmp from "./PrivateRouteEmp"
 import EmployeeRoute from "./components/Admin/EmployeeRoute"
 import LibRouting from "./components/LibRouting"
+import LibRouting1 from "./components/LibRouting1"
+
 
 const pageVariants = {
   initial: { opacity: 0, y: 20 },
@@ -148,6 +150,20 @@ function AnimatedRoutes() {
                   transition={pageTransition}
                 >
                   <About1 />
+                </motion.div>
+              }
+            />
+            <Route
+              path="librouting1"
+              element={
+                <motion.div
+                  initial="initial"
+                  animate="in"
+                  exit="out"
+                  variants={pageVariants}
+                  transition={pageTransition}
+                >
+                  <LibRouting1 />
                 </motion.div>
               }
             />
