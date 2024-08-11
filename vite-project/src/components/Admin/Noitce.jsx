@@ -87,8 +87,8 @@ const Notice = () => {
   };
 
   return (
-    <div className=" w-full h-full notice-background font-titillium">
-      <h1 className=" text-black text-5xl font-bold  text-center pt-2 py-2 rounded-lg ">
+    <div className="  font-titillium">
+      <h1 className="text-black text-5xl font-bold  text-center pt-2 py-2 rounded-lg ">
         NOTICE BOARD
       </h1>
       <div className="w-full flex flex-col items-center">
@@ -183,7 +183,7 @@ const Notice = () => {
           </select>
           <button
             type="submit"
-            className="px-6 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-600"
+            className="h-full px-6 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-600"
           >
             Add Notification
           </button>

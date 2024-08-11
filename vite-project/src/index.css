@@ -294,6 +294,14 @@ input[type="text"]:focus {
   width:fit-content;
 }
 
+#parent .left{
+  width:50%;
+  height:100%;
+}
+#parent .right{
+  width:50%;
+  height:100%;
+}
 
 
 

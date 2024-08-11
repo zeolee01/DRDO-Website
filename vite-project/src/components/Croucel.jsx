@@ -61,7 +61,7 @@ const Croucel = () => {
   }
 
   return (
-    <div className="w-full h-full bg-slate-600">
+    <div className=" bg-slate-600">
       <div
         id="carouselExampleIndicators"
         className="carousel slide h-full"

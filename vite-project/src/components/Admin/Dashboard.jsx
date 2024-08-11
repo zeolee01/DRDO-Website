@@ -32,7 +32,7 @@ const Home = () => {
   return (
     <div className="h-screen overflow-y-scroll scrollbar always-visible scrollbar-thumb-gray-400 bg-gradient-to-l from-gray-700 to-black ">
       <NavBar />
-      <div id="parent">
+      <div id="parent" className="notice-background">
         <motion.div
           initial="initial"
           animate="in"
@@ -51,7 +51,7 @@ const Home = () => {
           exit="out"
           variants={pageVariants}
           transition={pageTransition}
-          id="right"
+          class="right"
         >
           <Notice />
         </motion.div>
